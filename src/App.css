@@ -1,5 +1,16 @@
 .App {
   text-align: center;
+  background-color: antiquewhite;
 }
+ .person-wrapper{
+   padding-left: 25%;
+ }
+
+ .red{
+   color: red;
+ }
+ .bold{
+   font-weight: bold;
+ }
 
 

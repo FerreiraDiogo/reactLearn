@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
+import Radium from "radium";
 import Person from "./Person/Person";
 import UserOutput from "./Task/UserOutput";
 import UserInput from "./Task/UserInput";
+import ErrorBoundary from "../src/ErrorBoundaries/ErrorBoundary"
 
 class App extends Component {
   state = {
@@ -47,7 +49,6 @@ class App extends Component {
   }
 
   togglePersonsHandler = () => {
-
     const doesShow = this.state.showPersons;
     this.setState({
       showPersons: !doesShow,
@@ -58,36 +59,56 @@ class App extends Component {
   render() {
 
     const style = {
-      backgroundColor:"white",
+      backgroundColor:"green",
+      color:"white",
       font:"inherit",
       border: "1px solid blue",
       padding:"8px",
       cursor:"pointer",
+      boxShadow:"1px 1px grey",
+      ":hover":{
+        backgroundColor:"lightgreen",
+        color:"black",
+        transform:"scale(1.03)",
+      },
+      
+      
     }
 
     let person = null;
     if(this.state.showPersons){
       person = (
-        <div>
+        <div className = "person-wrapper">
 
               {this.state.persons.map((pessoa, index) => {
-                return <Person 
+                          
+                          return <ErrorBoundary key = {pessoa.id} > 
+                          <Person 
                           name = {pessoa.name} 
                           age = {pessoa.age}
                           click = {this.deletePersonHandler.bind(this,index)}
-                          key = {pessoa.id}
                           //changed = {this.nameChangedHandler.bind(this, event, pessoa.id)}/>
                           changed = {(event) => {this.nameChangedHandler(event,pessoa.id)}} />
+                      </ErrorBoundary>  
               })}
              
           </div> 
-      )
+      );
+      style.backgroundColor = "red";
+    }
+
+    let classes = [];
+    if(this.state.persons.length <= 2){
+      classes.push("red");
+    };
+    if(this.state.persons.length <= 1){
+      classes.push("bold");
     }
 
     return (
       <div className="App">
           <h1>Hello world app</h1>
-
+          <p className = {classes.join(" ")}>Pessoas na lista</p>
           <button
              style = {style}
              onClick = {this.togglePersonsHandler} >
@@ -108,10 +129,10 @@ class App extends Component {
 
           </UserOutput> */}
 
-         
+
       </div>
     );
   }
 }
 
-export default App;
+export default Radium(App);

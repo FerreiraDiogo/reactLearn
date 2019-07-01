@@ -2,9 +2,27 @@
     width: 60%;
     margin: 16px;
     border: 1px solid #eee;
-    box-shadow: 0 2px 3px #ccc;
+    box-shadow: 0 2px 3px rgb(109, 107, 107);
     padding: 16px;
     text-align: center;
     align-content: center;
-    background-color: blueviolet;
+    background-color: rgb(236, 235, 236);
+    transition: box-shadow 0.25s, transform 0.5s;
+    
+}
+
+.Person:hover{
+    box-shadow: 0 6px 12px gray;
+    transform: scale(1.01);
+    background-color: rgb(243, 243, 243);
+    transition: box-shadow 0.25s, transform 0.5s;
+
+}
+.Person-p{
+    margin-left: 160px;
+    margin-right: 160px;
+}
+.Person-p:hover{
+    color: red;
+    cursor: pointer;
 }
